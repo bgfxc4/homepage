@@ -13,19 +13,18 @@ export default {
     name: "LogoAnimation",
     data () {
         return {
-            
         }
     },
     methods: {
         generateAntPaths () {
-            console.log("generate")
             $(".path").remove()
-            for (var i = 0; i < 4; i++) {
-                var el = this.generatePath()
+            for (var i = 0; i < 6; i++) {
+                var el = this.generatePath(`ant-${i}`)
                 $("#paths")[0].innerHTML += el
             }
+            $(".path").one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", () => console.log("finished anim"))
         },
-        generatePath () {
+        generatePath (id) {
             var w = window.innerWidth
             var h = window.innerHeight
 
@@ -40,7 +39,7 @@ export default {
                 d = `M${startLeftOrTop ? 0 : w} ${Math.floor(Math.random() * h)} `
             }
 
-            while (Math.random() > .2) {
+            while (Math.random() > .15) {
                 if (goVertical) {
                     d += `V${Math.floor(Math.random() * h)} `
                 } else {
@@ -50,7 +49,7 @@ export default {
             }
             d += goVertical ? `V${(Math.random() > .5) ? h : 0}` : `H${(Math.random() > .5) ? w : 0}`
 
-            var p = `<path d="${d}" class="path"/>`
+            var p = `<path id="${id}" d="${d}" class="path" style="animation-delay: ${Math.floor(Math.random() * 5)}s; --animation-time: ${8 + Math.floor(Math.random() * 15)}s"/>`
             return p
         }
     },
@@ -94,15 +93,19 @@ export default {
         width: 100vw;
     }
 
+    :root {
+        --animation-time: 12s;
+    }
+
     .path {
         fill: none;
-        stroke: black;
+        stroke: #0000;
         stroke-dasharray: 6% 500%;
         stroke-width: 0.6%;
         stroke-dashoffset: 0%;
         stroke-linecap: round;
         stroke-linejoin: round;
-        animation: stroke-offset 20s infinite linear;
+        animation: stroke-offset var(--animation-time) linear infinite
     }
 
     .a {
@@ -110,6 +113,8 @@ export default {
     }
 
     @keyframes stroke-offset{
-        100% {stroke-dashoffset: -506%;}
+        0% {stroke: #0000}
+        1% {stroke: black}
+        100% {stroke-dashoffset: -506%; stroke: black}
     }
 </style>
