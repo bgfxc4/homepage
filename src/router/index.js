@@ -30,6 +30,7 @@ const router = createRouter({
 
 router.afterEach((to, from) => {
 	to.meta.transitionName = to.meta.verticalIdx < from.meta.verticalIdx ? 'slide-up' : 'slide-down'
+	if (from.name == undefined) to.meta.transitionName = ""
 })
 
 
