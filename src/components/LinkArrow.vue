@@ -1,6 +1,6 @@
 <template>
 	<router-link :to="routerLink ? routerLink : ''" @click="onClick ? onClick : () => {}" :id="'arrow-'+direction">
-		<font-awesome-icon size="3x" :icon="['far', 'circle-'+direction]"/>
+		<font-awesome-icon size="2x" :icon="['fas', 'arrow-'+direction]"/>
 	</router-link>
 </template>
 
@@ -17,12 +17,24 @@ export default {
 
 <style>
 
-a:-webkit-any-link  {
-	color: black
+a {
+	color: black;
+	border: black solid 4px;
+	border-radius: 50px;
+	width: 40px;
+	height: 40px;
+
+	text-align: center;
+	overflow: hidden;
+}
+
+a svg {
+	margin-left: 1px;
+	margin-top: 1px
 }
 
 a:hover {
-	color: rgb(41, 41, 41)
+	color: rgb(41, 41, 41);
 }
 
 #arrow-down {
@@ -30,23 +42,19 @@ a:hover {
 	left: 50%;
 	bottom: 5%;
 	transform: translate(-50%, 50%);
-	animation: move-down-reverse .3s 1;
 }
-#arrow-down:hover {
-	animation: move-down .3s 1;
-	bottom: 4%;
+#arrow-down:hover svg, #arrow-down:active svg {
+	animation: move-down ease .5s 1;
 }
 
 #arrow-left {
 	position: absolute;
-	left: 5%;
+	left: 3%;
 	bottom: 50%;
 	transform: translate(-50%, 50%);
-	animation: move-left-reverse .3s 1;
 }
-#arrow-left:hover {
-	animation: move-left .3s 1;
-	left: 4%;
+#arrow-left:hover svg {
+	animation: move-left ease .5s 1;
 }
 
 #arrow-right {
@@ -54,11 +62,9 @@ a:hover {
 	right: 0%;
 	bottom: 50%;
 	transform: translate(-50%, 50%);
-	animation: move-right-reverse .3s 1;
 }
-#arrow-right:hover {
-	animation: move-right .3s 1;
-	right: -1%;
+#arrow-right:hover svg {
+	animation: move-right ease .5s 1;
 }
 
 #arrow-up {
@@ -66,46 +72,37 @@ a:hover {
 	left: 50%;
 	top: 0%;
 	transform: translate(-50%, 50%);
-	animation: move-up-reverse .3s 1;
 }
-#arrow-up:hover {
-	animation: move-up .3s 1;
-	top: -1%;
+#arrow-up:hover svg {
+	animation: move-up ease .5s 1;
 }
 
 @keyframes move-down {
-	0% { bottom: 5%}
-	100% { bottom: 4%}
-}
-@keyframes move-down-reverse {
-	0% { bottom: 4%}
-	100% { bottom: 5%}
+	0% { transform: translateY(0px) }
+	50% { transform: translateY(40px) }
+	51% { transform: translateY(-40px) }
+	100% { transform: translateY(0px) }
 }
 
 @keyframes move-up {
-	0% { top: 0%}
-	100% { top: -1%}
-}
-@keyframes move-up-reverse {
-	0% { top: -1%}
-	100% { top: 0%}
+	0% { transform: translateY(0px) }
+	50% { transform: translateY(-40px) }
+	51% { transform: translateY(40px) }
+	100% { transform: translateY(0px) }
 }
 
 @keyframes move-left {
-	0% { left: 5%}
-	100% { left: 4%}
-}
-@keyframes move-left-reverse {
-	0% { left: 4%}
-	100% { left: 5%}
+	0% { transform: translateX(0px) }
+	50% { transform: translateX(-40px) }
+	51% { transform: translateX(40px) }
+	100% { transform: translateX(0px) }
 }
 
 @keyframes move-right {
-	0% { right: 0%}
-	100% { right: -1%}
+	0% { transform: translateX(0px) }
+	50% { transform: translateX(40px) }
+	51% { transform: translateX(-40px) }
+	100% { transform: translateX(0px) }
 }
-@keyframes move-right-reverse {
-	0% { right: -1%}
-	100% { right: 0%}
-}
+
 </style>
