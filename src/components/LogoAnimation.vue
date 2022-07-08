@@ -8,6 +8,10 @@
 		<svg id="paths">
 		</svg>
 
+		<div id="github-container" style="position: absolute; top: 5%; right: 5%">
+			<a href="https://github.com/bgfxc4/homepage"><font-awesome-icon :icon="['fab', 'github']" size="2x"/></a>
+		</div>
+
 		<link-arrow :direction="'down'" router-link="/projects"/>
 	</div>
 </template>
@@ -107,6 +111,10 @@ export default {
 		--animation-time: 12s;
 	}
 
+	a:visited {
+		color: black;
+	}
+
 	.path {
 		fill: none;
 		stroke: #0000;
@@ -116,10 +124,6 @@ export default {
 		stroke-linecap: round;
 		stroke-linejoin: round;
 		animation: stroke-offset var(--animation-time) linear infinite
-	}
-
-	.a {
-		fill: black !important;
 	}
 
 	@keyframes stroke-offset{
