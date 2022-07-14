@@ -13,7 +13,7 @@
 							{{p.text}}
 							<br>
 							<br>
-							<a class="btn btn-primary text-white" :href="p.github"><font-awesome-icon :icon="['fab', 'github']" size="x"/> <b>Github</b></a>
+							<a class="btn btn-primary text-white" :href="p.github"><font-awesome-icon :icon="['fab', 'github']"/> <b>Github</b></a>
 						</div>
 					</div>
 				</div>
@@ -22,20 +22,17 @@
 		</template>
 		<h3 class="middlePageText"><b style="color: #0000">{{projIdx+1}}</b> / {{projects.length}}</h3>
 
-		<link-arrow :direction="'left'" :onClick="projectSwipeLeft"/>
-		<link-arrow :direction="'right'" :onClick="projectSwipeRight"/>
-
-		<link-arrow :direction="'up'" router-link="/"/>
+		<navigation-manager :arrowBottom="false" @onLeft="projectSwipeLeft()" @onRight="projectSwipeRight()" :linkTop="'/'"/>
 	</div>
 </template>
 
 <script>
-import LinkArrow from "./LinkArrow.vue"
+import NavigationManager from "./NavigationManager.vue"
 
 export default {
 	name: "Projects",
 	components: {
-		LinkArrow
+		NavigationManager,
 	},
 	data () {
 		return {
@@ -68,7 +65,7 @@ export default {
 const projects = [
 	{
         title: "Dogfish",
-        text: "A simple and light weight chess game and probably also a chess engine in the future, written in C++. The current estimated elo of the engine is about 1300 compared to chess.com bots.",
+        text: "A simple and light weight chess game and also a chess engine, written in C++. The current estimated elo of the engine is about 1300 compared to chess.com bots.",
         img: "chess_picture.png",
         github: "https://github.com/bgfxc4/dogfish"
     },
@@ -80,7 +77,7 @@ const projects = [
     },
     {
         title: "Internefs",
-        text: "A selfwritten filesystem, that can't be used for accesing your hard drive, but for accesing the internet over GET, POST and HEAD http requests. It is written in C using libfuse.",
+        text: "A selfwritten filesystem, that can't be used for accessing your hard drive, but for accesing the internet over GET, POST and HEAD http requests. It is written in C using libfuse.",
         img: "internefs_picture.png",
         github: "https://github.com/bgfxc4/internefs"
     }
@@ -111,7 +108,7 @@ const projects = [
 }
 
 #projects {
-	height: 100vh;
+	height: 100%;
 	width: 100%;
 }
 

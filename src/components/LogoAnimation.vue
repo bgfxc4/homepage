@@ -12,17 +12,17 @@
 			<a href="https://github.com/bgfxc4/homepage"><font-awesome-icon :icon="['fab', 'github']" size="2x"/></a>
 		</div>
 
-		<link-arrow :direction="'down'" router-link="/projects"/>
+		<navigation-manager :linkBottom="'/projects'" :arrowLeft="false" :arrowRight="false" :arrowTop="false" />
 	</div>
 </template>
 
 <script>
-import LinkArrow from "./LinkArrow.vue"
+import NavigationManager from "./NavigationManager.vue"
 
 export default {
 	name: "LogoAnimation",
 	components: {
-		LinkArrow
+		NavigationManager,
 	},
 	methods: {
 		generateAntPaths () {
@@ -97,13 +97,13 @@ export default {
 	#app, html {
 		margin: 0;
 		padding: 0;
-		height: 100vh !important;
+		height: 100% !important;
 		width: 100vw !important;
 		overflow: hidden
 	}
 
-	#paths {
-		height: 100vh;
+	#LogoAnimation, #paths {
+		height: 100%;
 		width: 100vw;
 	}
 
