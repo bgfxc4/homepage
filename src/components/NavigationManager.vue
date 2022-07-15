@@ -34,6 +34,14 @@ export default {
         linkRight: {type: String, default: ""},
         linkTop: {type: String, default: ""},
         linkBottom: {type: String, default: ""},
+    },
+    mounted () {
+        var that = this
+        document.addEventListener("wheel", e => {
+            if (!that.allowScrollVertical) return
+            if (e.deltaY > 0)  {that.$emit('onDown'); (that.linkBottom != '' && that.$router.push(that.linkBottom))}
+            else if (e.deltaY < 0)  {that.$emit('onUp'); (that.linkTop != '' && that.$router.push(that.linkTop))}
+        })
     }
 }
 </script>

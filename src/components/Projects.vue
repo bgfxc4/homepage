@@ -77,7 +77,7 @@ const projects = [
     },
     {
         title: "Internefs",
-        text: "A selfwritten filesystem, that can't be used for accessing your hard drive, but for accesing the internet over GET, POST and HEAD http requests. It is written in C using libfuse.",
+        text: "A selfwritten filesystem, that can't be used for accessing your hard drive, but for accessing the internet over GET, POST and HEAD http requests. It is written in C using libfuse.",
         img: "internefs_picture.png",
         github: "https://github.com/bgfxc4/internefs"
     }
