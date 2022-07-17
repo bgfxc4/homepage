@@ -9,6 +9,7 @@
 		</svg>
 
 		<div id="github-container" style="position: absolute; top: 5%; right: 5%">
+			<toggle-switch :labelEnableText="'🌕'" :labelDisableText="'☀️'" @clicked="setDarkMode" :defaultState="$store.state.darkMode" style="margin-top: 2.5%; vertical-align: top; margin-right: 15px"/>
 			<a href="https://github.com/bgfxc4/homepage"><font-awesome-icon :icon="['fab', 'github']" size="2x"/></a>
 		</div>
 
@@ -18,11 +19,13 @@
 
 <script>
 import NavigationManager from "./NavigationManager.vue"
+import ToggleSwitch from "./ToggleSwitch.vue"
 
 export default {
 	name: "LogoAnimation",
 	components: {
 		NavigationManager,
+		ToggleSwitch
 	},
 	methods: {
 		generateAntPaths () {
@@ -62,6 +65,9 @@ export default {
 
 			var p = `<path id="${id}" d="${d}" class="path" style="animation-delay: ${Math.floor(Math.random() * 5)}s; --animation-time: ${8 + Math.floor(Math.random() * 15)}s"/>`
 			return p
+		},
+		setDarkMode (bool) {
+			this.$store.commit("setDarkMode", bool)
 		}
 	},
 	created () {
@@ -70,6 +76,8 @@ export default {
 	},
 	mounted () {
 		this.generateAntPaths()
+
+		if (this.$store.state.darkMode) $("*").addClass("darkMode")
 	}
 }
 </script>
@@ -78,6 +86,10 @@ export default {
 	h1 {
 		font-weight: 500;
 		font-size: 5vw;
+	}
+
+	h1.darkMode {
+		color: white
 	}
 
 	#logo-container {
@@ -94,6 +106,13 @@ export default {
 		height: auto;
 	}
 
+	#logo.darkMode {
+		filter: invert(95%);
+		transform: rotate(360deg);
+		animation-name: rotate-logo;
+		animation-duration: 1s;
+	}
+
 	#app, html {
 		margin: 0;
 		padding: 0;
@@ -107,12 +126,20 @@ export default {
 		width: 100vw;
 	}
 
+	#paths.darkMode {
+		filter: invert(95%)
+	}
+
 	:root {
 		--animation-time: 12s;
 	}
 
-	a:visited {
+	a:visited, a {
 		color: black;
+	}
+
+	a.darkMode:visited, a.darkMode {
+		color: white;
 	}
 
 	.path {
@@ -126,9 +153,14 @@ export default {
 		animation: stroke-offset var(--animation-time) linear infinite
 	}
 
-	@keyframes stroke-offset{
+	@keyframes stroke-offset {
 		0% {stroke: #0000}
 		1% {stroke: black}
 		100% {stroke-dashoffset: -506%; stroke: black}
+	}
+
+	@keyframes rotate-logo {
+		from {transform: rotate(0deg)}
+		to {transform: rotate(360deg)}
 	}
 </style>

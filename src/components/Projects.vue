@@ -1,7 +1,7 @@
 <template>
 	<div id="projects">
 		<template v-for="(p, idx) in projects" :key="p.title">
-			<div :id="'project-' + idx" :class="(idx == 0) ? 'initialProject' : ''" style="display: none; position: absolute; width: 94%; height: 83%; top: 9%; background-color: #f2f2f2; border-radius: 5px">
+			<div :id="'project-' + idx" class="projectPanel" :class="(idx == 0) ? 'initialProject' : ''">
 				<div class="row" style="height: 100%">
 					<div class="col-4">
 						<img class="proj-img" :src="'/imgs/projects/' + p.img">
@@ -59,6 +59,8 @@ export default {
 	},
 	mounted () {
 		$(".project-0").addClass("initialProject")
+
+		if (this.$store.state.darkMode) $("*").addClass("darkMode")
 	}
 }
 
@@ -110,6 +112,21 @@ const projects = [
 #projects {
 	height: 100%;
 	width: 100%;
+}
+
+.projectPanel {
+	display: none; 
+	position: absolute; 
+	width: 94%; 
+	height: 83%; 
+	top: 9%; 
+	background-color: #f2f2f2; 
+	border-radius: 5px
+}
+
+.projectPanel.darkMode {
+	background-color: var(--color-background-soft-dark);
+	color: var(--color-text-dark)
 }
 
 @keyframes projectEnterLeft {

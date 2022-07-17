@@ -27,11 +27,19 @@
 	--color-background-soft: var(--vt-c-white-soft);
 	--color-background-mute: var(--vt-c-white-mute);
 
+	--color-background-dark: var(--vt-c-black);
+	--color-background-soft-dark: var(--vt-c-black-soft);
+	--color-background-mute-dark: var(--vt-c-black-mute);
+
 	--color-border: var(--vt-c-divider-light-2);
 	--color-border-hover: var(--vt-c-divider-light-1);
 
 	--color-heading: var(--vt-c-text-light-1);
 	--color-text: var(--vt-c-black);
+
+	--color-heading-dark: var(--vt-c-text-dark-1);
+	--color-text-dark: var(--vt-c-white-mute);
+
 
 	--section-gap: 160px;
 }
@@ -56,4 +64,9 @@ body {
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+body.darkMode {
+	color: var(--color-text-dark);
+	background: var(--color-background-dark);
 }

@@ -28,6 +28,11 @@ a {
 	overflow: hidden;
 }
 
+a.darkMode {
+	color: #f2f2f2;
+	border: #f2f2f2 solid 4px;	
+}
+
 a svg {
 	margin-left: 1px;
 	margin-top: 1px
