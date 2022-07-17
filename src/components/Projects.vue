@@ -61,6 +61,7 @@ export default {
 		$(".project-0").addClass("initialProject")
 
 		if (this.$store.state.darkMode) $("*").addClass("darkMode")
+		else $("*").removeClass("darkMode")
 	}
 }
 

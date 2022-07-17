@@ -78,6 +78,7 @@ export default {
 		this.generateAntPaths()
 
 		if (this.$store.state.darkMode) $("*").addClass("darkMode")
+		else $("*").removeClass("darkMode")
 	}
 }
 </script>
