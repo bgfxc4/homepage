@@ -37,6 +37,10 @@ export default {
 		generateAntPaths () {
 			if (!this.logoLoaded) return
 			if (this.$route.name != "Home") return
+			if ($("#logo").offset().top < 0) { // if logo is still moving bc of transition animation, wait 1 sec and retry
+				setTimeout(this.generateAntPaths, 1000)
+				return
+			}
 
 			$(".path").remove()
 			for (var i = 0; i < 6; i++) {
@@ -59,6 +63,7 @@ export default {
 			var lH = $("#logo").height()
 			var lOl = $("#logo").offset().left
 			var lOt = $("#logo").offset().top
+			console.log(`lW ${lW}; lH ${lH}; lOl ${lOl}; lOt ${lOt}; w ${w}; h ${h}`)
 
 			var goVertical = Math.random() > .5
 			let firstVertical = goVertical
@@ -115,8 +120,8 @@ export default {
 				}
 				goVertical = !goVertical
 			}
-			let canIntersectLogo = goVertical ? (currentPos.x > lOl && currentPos.x < (lOl + lW)) : (currentPos.y > lOt && currentPos.y < (lOt + lH)) // position is either above/beneath or at height of logo
-			let aboveOrLeft = goVertical ? currentPos.y < lOt : currentPos.x < lOl
+			let canIntersectLogo = goVertical ? (currentPos.x > lOl || currentPos.x < (lOl + lW)) : (currentPos.y > lOt || currentPos.y < (lOt + lH)) // position is either above/beneath or at height of logo
+			let aboveOrLeft = goVertical ? (currentPos.y < lOt) : (currentPos.x < lOl)
 			let lastMove = goVertical ? ((canIntersectLogo ? aboveOrLeft : (Math.random() > .5)) ? 0 : h) : ((canIntersectLogo ? aboveOrLeft : (Math.random() > .5)) ? 0 : w)
 			d.push(lastMove)
 			debugD.push({isVertical: goVertical, isLast: true, canIntersectLogo, aboveOrLeft, move: lastMove, currentPos: currentPos})
