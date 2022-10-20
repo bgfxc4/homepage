@@ -2,19 +2,16 @@
 	<div id="projects">
 		<template v-for="(p, idx) in projects" :key="p.title">
 			<div :id="'project-' + idx" class="projectPanel" :class="(idx == 0) ? 'initialProject' : ''">
-				<div class="row" style="height: 100%">
-					<div class="col-4">
-						<img class="proj-img" :src="'/imgs/projects/' + p.img">
-					</div>
-					<div class="col-8">
-						<div class="proj-text">
-							<h3>{{p.title}}</h3>
-							<br>
-							{{p.text}}
-							<br>
-							<br>
-							<a class="btn btn-primary text-white" :href="p.github"><font-awesome-icon :icon="['fab', 'github']"/> <b>Github</b></a>
-						</div>
+
+				<img class="proj-img" :src="'/imgs/projects/' + p.img">
+				<div class="proj-text-container">
+					<div class="proj-text text-light">
+						<h3>{{p.title}}</h3>
+						<br>
+						{{p.text}}
+						<br>
+						<br>
+						<a class="btn btn-primary text-white" :href="p.github"><font-awesome-icon :icon="['fab', 'github']"/> <b>Github</b></a>
 					</div>
 				</div>
 				<h3 style="bottom: -6.1%" class="middlePageText">{{idx+1}}<b style="color: #0000"> / {{projects.length}}</b></h3>
@@ -89,18 +86,27 @@ const projects = [
 
 <style>
 .proj-img {
-	max-width: 90%;
-	max-height: 90%;
-	margin-left: 50%;
-	margin-top: 30%;
-	transform: translateX(-50%);
+	position: absolute;
+	height: 100%;
 	border-radius: 7px;
 }
 
+.proj-text-container {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	/*padding-right: 40%;
+	padding-left: 5%;
+	padding-top: 50%;*/
+
+	background: linear-gradient(to top right, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0));
+}
+
 .proj-text {
-	margin-left: 40%;
-	margin-top: 20%;
-	transform: translateX(-50%);
+	position: absolute;
+	bottom: 20px;
+	left: 15px;
+	width: 60%;
 }
 
 .middlePageText {
