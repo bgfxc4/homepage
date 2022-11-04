@@ -1,6 +1,9 @@
 <template>
 	<router-link :to="routerLink ? routerLink : ''" @click="onClick" :id="'arrow-'+direction">
-		<font-awesome-icon size="2x" :icon="['fas', 'arrow-'+direction]"/>
+		<div class="arrow">
+			<div class="arrow-top"></div>
+			<div class="arrow-bottom"></div>
+		</div>
 	</router-link>
 </template>
 
@@ -16,58 +19,110 @@ export default {
 </script>
 
 <style scoped>
-
-a {
-	color: black;
-	border: black solid 4px;
-	border-radius: 50px;
-	width: 40px;
-	height: 40px;
-
-	text-align: center;
-	overflow: hidden;
-}
-
-a.darkMode {
-	color: #f2f2f2;
-	border: #f2f2f2 solid 4px;	
-}
-
-a svg {
-	margin-left: 1px;
-	margin-top: 1px
-}
-
-a:hover {
-	color: rgb(41, 41, 41);
-}
-
 #arrow-down {
 	position: absolute;
+	transform: translateX(-50%) translateY(50%);
 	left: 50%;
-	bottom: 5%;
-	transform: translate(-50%, 50%);
+	bottom: 2%;
+	rotate: 90deg;
 }
 
 #arrow-left {
 	position: absolute;
-	left: 3%;
+	transform: translateX(-50%) translateY(-50%);
+	left: 2%;
 	bottom: 50%;
-	transform: translate(-50%, 50%);
+	rotate: 180deg;
 }
 
 #arrow-right {
 	position: absolute;
-	left: 97%;
+	transform: translateX(-50%) translateY(50%);
+	right: 2%;
 	bottom: 50%;
-	transform: translate(-50%, 50%);
 }
 
 #arrow-up {
 	position: absolute;
+	transform: translateX(-50%) translateY(-50%);
 	left: 50%;
-	top: 0%;
-	transform: translate(-50%, 50%);
+	top: 2%;
+	rotate: 270deg;
+}
+
+.arrow {
+	cursor: pointer;
+	height: 4vh;
+	width: 4vh;
+	transition: transform .1s;
+	left: 50%;
+	top: 50%;
+}
+
+.arrow-top {
+	transform: rotate(45deg);
+	transform-origin: bottom right;
+}
+.arrow-top:after {
+	left: 100%;
+	right: 0;
+	transition-delay: 0s;
+}
+
+  
+.arrow-bottom {
+	transform: rotate(-45deg);
+	transform-origin: top right;
+}
+
+.arrow-bottom:after {
+	left: 0;
+	right: 100%;
+	transition-delay: .15s;
+}
+
+.arrow:hover .arrow-top:after {
+	left: 0;
+	transition-delay: .15s;
+}
+
+.arrow:hover .arrow-bottom:after {
+	right: 0;
+	transition-delay: 0s;
+}
+  
+.arrow:active {
+	transform: scale(0.9);
+}
+
+.arrow-top,
+.arrow-bottom {
+	background-color: #000;
+	height: 4px;
+	left: -5px;
+	position: absolute;
+	top: 50%;
+	width: 100%;
+}
+
+.arrow-top:after,
+.arrow-bottom:after {
+	background-color: #777;
+	content: '';
+	height: 100%;
+	position: absolute;
+	top: 0;
+	transition: all .15s;
+}
+
+.arrow-top.darkMode,
+.arrow-bottom.darkMode {
+	background-color: #fff;
+}
+
+.arrow-top.darkMode:after,
+.arrow-bottom.darkMode:after {
+	background-color: #777;
 }
 
 </style>

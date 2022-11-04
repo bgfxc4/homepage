@@ -2,8 +2,9 @@
 	<div id="projects">
 		<template v-for="(p, idx) in projects" :key="p.title">
 			<div :id="'project-' + idx" class="projectPanel" :class="(idx == 0) ? 'initialProject' : ''">
-
-				<img class="proj-img" :src="'/imgs/projects/' + p.img">
+				<div class="img-container">
+					<img class="proj-img" :src="'/imgs/projects/' + p.img">
+				</div>
 				<div class="proj-text-container">
 					<div class="proj-text text-light">
 						<h3>{{p.title}}</h3>
@@ -64,23 +65,23 @@ export default {
 
 const projects = [
 	{
-        title: "Dogfish",
-        text: "A simple and light weight chess game and also a chess engine, written in C++. The current estimated elo of the engine is about 1300 compared to chess.com bots.",
-        img: "chess_picture.png",
-        github: "https://github.com/bgfxc4/dogfish"
-    },
-    {
-        title: "Bgfxc4s Bot",
-        text: "A discord bot, that can do multiple things, for example manage roles, move users and has its own permission system using mongodb.",
-        img: "bgfxc4sbot_picture.png",
-        github: "https://github.com/bgfxc4/bgfxc4s-bot"
-    },
-    {
-        title: "Internefs",
-        text: "A selfwritten filesystem, that can't be used for accessing your hard drive, but for accessing the internet over GET, POST and HEAD http requests. It is written in C using libfuse.",
-        img: "internefs_picture.png",
-        github: "https://github.com/bgfxc4/internefs"
-    }
+		title: "Dogfish",
+		text: "A simple and light weight chess game and also a chess engine, written in C++. The current estimated elo of the engine is about 1300 compared to chess.com bots.",
+		img: "chess_picture.png",
+		github: "https://github.com/bgfxc4/dogfish"
+	},
+	{
+		title: "Bgfxc4s Bot",
+		text: "A discord bot, that can do multiple things, for example manage roles, move users and has its own permission system using mongodb.",
+		img: "bgfxc4sbot_picture.png",
+		github: "https://github.com/bgfxc4/bgfxc4s-bot"
+	},
+	{
+		title: "Internefs",
+		text: "A selfwritten filesystem, that can't be used for accessing your hard drive, but for accessing the internet over GET, POST and HEAD http requests. It is written in C using libfuse.",
+		img: "internefs_picture.png",
+		github: "https://github.com/bgfxc4/internefs"
+	}
 ]
 </script>
 
@@ -88,17 +89,14 @@ const projects = [
 .proj-img {
 	position: absolute;
 	height: 100%;
-	border-radius: 7px;
+	border-radius: 10px;
 }
 
 .proj-text-container {
 	position: relative;
 	height: 100%;
 	width: 100%;
-	/*padding-right: 40%;
-	padding-left: 5%;
-	padding-top: 50%;*/
-
+	border-radius: 10px;
 	background: linear-gradient(to top right, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0));
 }
 
@@ -122,13 +120,48 @@ const projects = [
 }
 
 .projectPanel {
-	display: none; 
-	position: absolute; 
-	width: 94%; 
-	height: 83%; 
-	top: 9%; 
-	background-color: #f2f2f2; 
-	border-radius: 5px
+	display: none;
+	position: absolute;
+	width: 94%;
+	height: 83%;
+	top: 9%;
+	background-color: #f2f2f2;
+	border-radius: 10px;
+}
+
+.projectPanel .img-container {
+	position: inherit;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+    border-radius: inherit;
+}
+
+.projectPanel:before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to top right, rgba(0, 0, 0, .8), rgba(0, 0, 0, 0));
+    transform: translate(-20px, 20px);
+    filter: blur(19px);
+    opacity: var(0.62);
+    transition: opacity 0.3s;
+    border-radius: inherit;
+}
+.projectPanel::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: inherit;
+    border-radius: inherit;
 }
 
 .projectPanel.darkMode {
@@ -139,36 +172,44 @@ const projects = [
 @keyframes projectEnterLeft {
 	from {
 		left: -100%;
+    	transform: scale(0.8);
 	}
 	to {
 		left: 3%;
+    	transform: scale(1);
 	}
 }
 
 @keyframes projectExitLeft {
 	from {
 		left: 3%;
+    	transform: scale(1);
 	}
 	to {
 		left: -100%;
+    	transform: scale(0.8);
 	}
 }
 
 @keyframes projectEnterRight {
 	from {
 		right: -100%;
+    	transform: scale(0.8);
 	}
 	to {
 		right: 3%;
+    	transform: scale(1);
 	}
 }
 
 @keyframes projectExitRight {
 	from {
 		right: 3%;
+    	transform: scale(1);
 	}
 	to {
 		right: -100%;
+    	transform: scale(0.8);
 	}
 }
 
