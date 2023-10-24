@@ -9,6 +9,7 @@ export default createStore({
     mutations: {
         setDarkMode(state, mode) {
             state.darkMode = mode
+            $(".preModeSwitch").removeClass("preModeSwitch")
             if (mode)
                 $("*").addClass("darkMode")
             else

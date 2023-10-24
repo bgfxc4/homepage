@@ -2,7 +2,7 @@
 	<div id="LogoAnimation">
 		<div id="logo-container">
 			<h1>bgfxc4</h1>
-			<img @load="logoLoaded = true; generateAntPaths()" src="/logo.svg" id="logo">
+			<img @load="logoLoaded = true; generateAntPaths()" src="/logo.svg" id="logo" class="preModeSwitch">
 		</div>
 
 		<svg id="paths">
@@ -217,6 +217,9 @@ ${point.isLast ? `canIntersectLogo: ${point.canIntersectLogo}\naboveOrLeft: ${po
 		max-height: 50vh;
 		width: 30vw;
 		height: auto;
+		animation-name: rotate-logo-back;
+		animation-duration: 1s;
+		transform: rotate(0deg);
 	}
 
 	#logo.darkMode {
@@ -225,6 +228,12 @@ ${point.isLast ? `canIntersectLogo: ${point.canIntersectLogo}\naboveOrLeft: ${po
 		animation-name: rotate-logo;
 		animation-duration: 1s;
 	}
+
+    #logo.preModeSwitch {
+        animation-duration: 0s !important;
+        -webkit-animation-duration: 0s !important;
+        transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
+    }
 
 	#app, html {
 		margin: 0;
@@ -289,5 +298,10 @@ ${point.isLast ? `canIntersectLogo: ${point.canIntersectLogo}\naboveOrLeft: ${po
 	@keyframes rotate-logo {
 		from {transform: rotate(0deg)}
 		to {transform: rotate(360deg)}
+	}
+
+	@keyframes rotate-logo-back {
+		from {transform: rotate(360deg)}
+		to {transform: rotate(0deg)}
 	}
 </style>
