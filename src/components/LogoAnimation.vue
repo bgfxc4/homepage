@@ -1,8 +1,21 @@
 <template>
 	<div id="LogoAnimation">
 		<div id="logo-container">
-			<h1>bgfxc4</h1>
-			<img @load="logoLoaded = true; generateAntPaths()" src="/logo.svg" id="logo" class="preModeSwitch">
+			<h1 style="height: 5vh">bgfxc4</h1>
+            <div id="logo" class="preModeSwitch">
+                <label for="toggle-menu"><img @load="logoLoaded = true; generateAntPaths()" src="/logo.svg" @click="removeClickLogoText"></label>
+                <input id="toggle-menu" type="checkbox" hidden>
+                <div id="menu-container">
+                    <router-link to="/projects" class="icon-container right" style="text-decoration: none">
+                        <span class="icon">📋</span>
+                        <span class="icon-text">Projects</span>
+                    </router-link>
+                    <router-link to="/contact" class="icon-container left" style="text-decoration: none">
+                        <span class="icon-text">Contact</span>
+                        <span class="icon">✏️</span>
+                    </router-link>
+                </div>
+            </div>
 		</div>
 
 		<svg id="paths">
@@ -12,20 +25,21 @@
 			<toggle-switch :labelEnableText="'🌕'" :labelDisableText="'☀️'" @clicked="setDarkMode" :defaultState="$store.state.darkMode" style="margin-top: 2.5%; vertical-align: top; margin-right: 15px"/>
 			<a href="https://github.com/bgfxc4/homepage"><font-awesome-icon :icon="['fab', 'github']" size="2x"/></a>
 		</div>
-
-		<navigation-manager :linkBottom="'/projects'" :arrowLeft="false" :arrowRight="false" :arrowTop="false" />
+        <click-logo-text />
 	</div>
 </template>
 
 <script>
 import NavigationManager from "./NavigationManager.vue"
 import ToggleSwitch from "./ToggleSwitch.vue"
+import ClickLogoText from "./ClickLogoText.vue"
 
 export default {
 	name: "LogoAnimation",
 	components: {
 		NavigationManager,
-		ToggleSwitch
+		ToggleSwitch,
+        ClickLogoText,
 	},
 	data () {
 		return {
@@ -178,11 +192,14 @@ ${point.isLast ? `canIntersectLogo: ${point.canIntersectLogo}\naboveOrLeft: ${po
 		logKey (e) {
 			if (e.code == "KeyD")
 				this.setDebug(!this.debug)
-		}
+		},
+        removeClickLogoText () {
+            $("#ClickLogoText").remove()
+        }
 	},
 	created () {
-		document.addEventListener("DOMContentLoaded", this.generateAntPaths)
-		window.addEventListener("resize", this.generateAntPaths)
+		// document.addEventListener("DOMContentLoaded", this.generateAntPaths)
+		// window.addEventListener("resize", this.generateAntPaths)
 	},
 	mounted () {
 		this.generateAntPaths()
@@ -205,22 +222,97 @@ ${point.isLast ? `canIntersectLogo: ${point.canIntersectLogo}\naboveOrLeft: ${po
 		color: white
 	}
 
+    a span.darkMode {
+        filter: invert(100%);
+        color: white;
+    }
+
+    #menu-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+		text-align: center;
+        translate: 0 -100%;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
 	#logo-container {
 		position: absolute;
-		top: 50%;
-		left: 50%;
+		top: 44vh;
+		left: 50vw;
 		transform: translate(-50%, -50%);
 		text-align: center;
+        justify-content: center;
 	}
 
+    .icon-container {
+        position: absolute;
+        vertical-align: middle;
+        white-space: nowrap;
+        display: none;
+        z-index: -10;
+        font-size: min(4vw, 2em);
+    }
+
+    .icon-container.left {
+        animation: hide-menu-icon-left 0.3s;
+        left: -25vw;
+    }
+
+    .icon-container.right {
+        animation: hide-menu-icon-right 0.3s;
+        right: -25vw;
+    }
+
+    .icon-container .icon {
+        color: black;
+        display: inline;
+        padding: 8px;
+        aspect-ratio: 1 / 1;
+    }
+
+    .icon-container .icon-text {
+        display: inline;
+    }
+
+    label[for=toggle-menu] {
+        background-color: white;
+        border-radius: 20px;
+    }
+
+    #toggle-menu:checked ~ #menu-container .icon-container {
+        display: inline;
+    }
+
+    #toggle-menu:checked ~ #menu-container .icon-container.left {
+        animation: show-menu-icon-left 0.3s;
+    }
+
+    #toggle-menu:checked ~ #menu-container .icon-container.right {
+        animation: show-menu-icon-right 0.3s;
+    }
+
 	#logo {
-		max-height: 50vh;
-		width: 30vw;
+        position: relative;
+        margin-top: 7vh;
+		max-height: 40vh;
+		width: 18vw;
 		height: auto;
 		animation-name: rotate-logo-back;
 		animation-duration: 1s;
 		transform: rotate(0deg);
+        margin-left: 50%;
+        translate: -50%;
 	}
+
+    #logo img {
+        width: 100%;
+        height: 100%;
+    }
 
 	#logo.darkMode {
 		filter: invert(95%);
@@ -264,6 +356,10 @@ ${point.isLast ? `canIntersectLogo: ${point.canIntersectLogo}\naboveOrLeft: ${po
 		color: white;
 	}
 
+    #paths {
+        z-index: -20;
+    }
+
 	.path {
 		fill: none;
 		stroke: #0000;
@@ -304,4 +400,36 @@ ${point.isLast ? `canIntersectLogo: ${point.canIntersectLogo}\naboveOrLeft: ${po
 		from {transform: rotate(360deg)}
 		to {transform: rotate(0deg)}
 	}
+
+    @keyframes show-menu-icon-left {
+        from {left: 0}
+        to {left: -25vw}
+    }
+
+    @keyframes show-menu-icon-right {
+        from {right: 0}
+        to {right: -25vw}
+    }
+
+    @keyframes hide-menu-icon-left {
+        0% {
+            left: -100%;
+            display: inline;
+        }
+        100% {
+            left: 0;
+            display: inline
+        }
+    }
+
+    @keyframes hide-menu-icon-right {
+        0% {
+            right: -100%;
+            display: inline;
+        }
+        100% {
+            right: 0;
+            display: inline;
+        }
+    }
 </style>

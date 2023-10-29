@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LogoAnimation from "@/components/LogoAnimation.vue"
 import Projects from "@/components/Projects.vue"
+import Contact from "@/components/Contact.vue"
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,12 @@ const router = createRouter({
 			name: "Projects",
 			component: Projects,
 			meta: {verticalIdx: 1}
+		},
+		{
+			path: "/contact",
+			name: "Contact",
+			component: Contact,
+			meta: {verticalIdx: -1}
 		}
 	]
 })
