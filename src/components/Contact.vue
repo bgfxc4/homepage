@@ -51,7 +51,7 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: 700px;
-    background-color: grey;
+    background-color: var(--color-background-secondary);
     position: absolute;
     left: 50%;
     top: 30%;
@@ -63,7 +63,7 @@ export default {
 }
 
 .contact-item a {
-    color: black;
+    color: var(--highlight-color);
 }
 
 .contact-item a:hover {

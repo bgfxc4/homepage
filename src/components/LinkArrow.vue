@@ -97,7 +97,7 @@ export default {
 
 .arrow-top,
 .arrow-bottom {
-	background-color: #000;
+	background-color: var(--highlight-color);
 	height: 4px;
 	left: -5px;
 	position: absolute;
@@ -107,7 +107,7 @@ export default {
 
 .arrow-top:after,
 .arrow-bottom:after {
-	background-color: #777;
+	background-color: var(--highlight-color-soft);
 	content: '';
 	height: 100%;
 	position: absolute;
@@ -115,14 +115,9 @@ export default {
 	transition: all .15s;
 }
 
-.arrow-top.darkMode,
-.arrow-bottom.darkMode {
-	background-color: #fff;
-}
-
 .arrow-top.darkMode:after,
 .arrow-bottom.darkMode:after {
-	background-color: #777;
+	background-color: var(--highlight-color-soft);
 }
 
 </style>

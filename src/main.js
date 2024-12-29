@@ -1,14 +1,14 @@
 import { createApp } from 'vue'
+import { createBootstrap } from 'bootstrap-vue-next'
 import jQuery from "jquery"
 
 import App from './App.vue'
 import router from './router'
 import store from "./store"
 
-import { BootstrapVue3 } from 'bootstrap-vue-3'
 import 'bootstrap/dist/css/bootstrap.css'
 //import './assets/css/bootstrap.min.css'
-import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
+import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { fas } from "@fortawesome/free-solid-svg-icons"
@@ -20,7 +20,7 @@ library.add(fas, far, fab)
 window.$ = jQuery
 const app = createApp(App)
 
-app.use(BootstrapVue3)
+app.use(createBootstrap())
 
 app.use(router)
 app.use(store)
