@@ -12,7 +12,8 @@
 						{{p.text}}
 						<br>
 						<br>
-						<a class="btn btn-primary text-white" :href="p.github"><font-awesome-icon :icon="['fab', 'github']"/> <b>Github</b></a>
+						<a v-if="p.github" target="_blank" class="btn btn-primary text-white mx-2" :href="p.github"><font-awesome-icon :icon="['fab', 'github']"/> <b>Github</b></a>
+						<a v-if="p.link" target="_blank" class="btn btn-primary text-white mx-2" :href="p.link"><font-awesome-icon :icon="['fa', 'link']"/> <b>Link</b></a>
 					</div>
 				</div>
 				<h3 style="bottom: -6.1%" class="middlePageText">{{idx+1}}<b style="color: #0000"> / {{projects.length}}</b></h3>
@@ -71,10 +72,10 @@ const projects = [
 		github: "https://github.com/bgfxc4/dogfish"
 	},
 	{
-		title: "Bgfxc4s Bot",
-		text: "A discord bot, that can do multiple things, for example manage roles, move users and has its own permission system using mongodb.",
-		img: "bgfxc4sbot_picture.png",
-		github: "https://github.com/bgfxc4/bgfxc4s-bot"
+		title: "DHBW Engineering",
+		text: "A bunch of students working on a racing car for paricipating in the international Formula Student competition. I am working in the autonomous racing subteam.",
+		img: "engineering.png",
+		link: "https://dhbw-engineering.de",
 	},
 	{
 		title: "Internefs",
