@@ -26,8 +26,16 @@ export default {
 
 <style>
     #ClickLogoText {
+        --bounce-easing: linear(
+            0, 0.004, 0.016, 0.035, 0.063, 0.098, 0.141, 0.191, 0.25, 0.317, 0.391 22.7%,
+            0.563, 0.765, 1 36.4%, 0.941, 0.891, 0.848, 0.813, 0.785, 0.766, 0.754, 0.75,
+            0.754, 0.766, 0.785, 0.813, 0.848, 0.891, 0.941, 1, 0.973, 0.953, 0.941,
+            0.938, 0.941, 0.953, 0.973, 1, 0.988, 0.984, 0.988, 1
+        );
+
         position: absolute;
-        animation: bounce 1.8s ease-out 5s;
+        animation: bounce 1.8s 5s;
+        animation-timing-function: var(--bounce-easing);
         bottom: 50%;
         left: 50%;
         translate: -50% 0;
@@ -62,14 +70,9 @@ export default {
     .letter:nth-child(15) { animation-delay: .7s; }
 
     @keyframes bounce {
-        0% { bottom: 50%; animation-timing-function: ease-in; scale: 0%; }
-        14% { bottom: 5%; animation-timing-function: ease-out; scale: 1; }
-        28% { bottom: 20%; animation-timing-function: ease-in; }
-        42% { bottom: 5%; animation-timing-function: ease-out; }
-        56% { bottom: 15%; animation-timing-function: ease-in; }
-        70% { bottom: 5%; animation-timing-function: ease-out; }
-        85% { bottom: 12%; animation-timing-function: ease-in; }
-        100% { bottom: 5%; animation-timing-function: ease-out; }
+        0% { bottom: 50%; scale: 0; }
+        1% { scale: 1 }
+        100% { bottom: 5%; }
     }
 
     @keyframes letter-bounce {
