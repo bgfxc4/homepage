@@ -348,11 +348,11 @@ ${point.isLast ? `canIntersectLogo: ${point.canIntersectLogo}\naboveOrLeft: ${po
 		--animation-time: 12s;
 	}
 
-	a:visited, a {
+	.icon-text, #github-container a{
 		color: black;
 	}
 
-	a.darkMode:visited, a.darkMode {
+	.icon-text.darkMode, #github-container.darkMode a {
 		color: white;
 	}
 
